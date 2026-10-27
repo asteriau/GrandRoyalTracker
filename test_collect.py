@@ -85,6 +85,17 @@ class Merge(unittest.TestCase):
         with self.assertRaises(AssertionError):
             collect.check_no_shrink(old, self.empty())
 
+    def test_window_cutoff_is_whole_days(self):
+        # NOW is 2026-10-27T12:00:00Z; cutoff is 2026-09-27T00:00:00Z
+        s = collect.merge(self.empty(), [
+            sale("a1", "2026-09-27T01:00:00Z", 100, "s1"),  # kept: same day as cutoff, before noon
+            sale("a2", "2026-09-26T23:00:00Z", 100, "s2"),  # dropped: day before cutoff
+        ], [], None, NOW)
+        self.assertIn("a1", s["sales"])
+        self.assertNotIn("a2", s["sales"])
+        self.assertEqual(s["days"]["2026-09-27"]["sold"], 1)
+        self.assertNotIn("2026-09-26", s["days"])
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -42,7 +42,7 @@ def aggregate_days(sales):
 def merge(state, sales, listed, active, now):
     skins = {k: list(v) for k, v in state["skins"].items()}
     kept = dict(state["sales"])
-    cutoff = fmt(parse(now) - timedelta(days=WINDOW_DAYS))
+    cutoff = fmt(parse(now[:10] + "T00:00:00Z") - timedelta(days=WINDOW_DAYS))
 
     def seen(item, when):
         first, count = skins.get(item, [when, 0])
