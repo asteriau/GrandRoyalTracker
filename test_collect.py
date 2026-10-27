@@ -1,4 +1,6 @@
 import json
+import os
+import tempfile
 import unittest
 
 import collect
@@ -95,6 +97,43 @@ class Merge(unittest.TestCase):
         self.assertNotIn("a2", s["sales"])
         self.assertEqual(s["days"]["2026-09-27"]["sold"], 1)
         self.assertNotIn("2026-09-26", s["days"])
+
+
+def boom():
+    raise OSError("down")
+
+
+class Main(unittest.TestCase):
+    def setUp(self):
+        self.dir = tempfile.mkdtemp()
+        self.path = os.path.join(self.dir, "skins.json")
+
+    def read(self):
+        return json.load(open(self.path))
+
+    def test_both_sources_down_exits_1_and_writes_nothing(self):
+        code = collect.main(self.path, NOW, fetch_sales=boom, fetch_active=boom)
+        self.assertEqual(code, 1)
+        self.assertFalse(os.path.exists(self.path))
+
+    def test_one_source_down_still_writes(self):
+        code = collect.main(self.path, NOW, fetch_sales=lambda: [sale("a1", "2026-10-26T08:00:00Z", 100, "s1")], fetch_active=boom)
+        self.assertEqual(code, 0)
+        self.assertEqual(self.read()["skins"]["s1"], ["2026-10-26T08:00:00Z", 1])
+        self.assertIsNone(self.read()["active"])
+
+    def test_unchanged_state_is_not_rewritten(self):
+        fs = lambda: [sale("a1", "2026-10-26T08:00:00Z", 100, "s1")]
+        fa = lambda: ([], {"at": NOW, "count": 0, "lowest_bin": None})
+        collect.main(self.path, NOW, fetch_sales=fs, fetch_active=fa)
+        before = os.stat(self.path).st_mtime_ns
+        collect.main(self.path, "2026-10-27T12:15:00Z", fetch_sales=fs, fetch_active=fa)
+        self.assertEqual(os.stat(self.path).st_mtime_ns, before)
+
+    def test_missing_file_starts_empty(self):
+        code = collect.main(self.path, NOW, fetch_sales=lambda: [], fetch_active=lambda: ([{"item": "s9", "start": NOW}], {"at": NOW, "count": 1, "lowest_bin": 5}))
+        self.assertEqual(code, 0)
+        self.assertEqual(self.read()["skins"], {"s9": [NOW, 0]})
 
 
 if __name__ == "__main__":
