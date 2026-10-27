@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Grand Royal skins</title>
+<meta name="description" content="How many Grand Royal Skins exist on Hypixel SkyBlock, counted from the auction house.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@6..144,300..1000&display=swap">
+<style>
+:root {
+  --n1:#121212; --n2:#151515; --n3:#181818; --n4:#1f1f1f; --n5:#2e2e2e; --n6:#424242; --n7:#868282; --n8:#bbb6b6; --n10:#e8e3e3;
+  --blue:#8da3b9; --green:#8c977d; --red:#b66467;
+  --shadow:0 1px 9px 1px rgb(0 0 0 / .3);
+  color-scheme:dark;
+}
+* { box-sizing:border-box; }
+html, body { margin:0; background:var(--n1); color:var(--n10); }
+body {
+  font-family:"Google Sans Flex","Google Sans",system-ui,sans-serif; font-variation-settings:"wght" 450; font-size:15px; line-height:1.25;
+  min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:32px 16px; position:relative; overflow-x:hidden;
+}
+body::before, body::after { content:""; position:fixed; inset:0; pointer-events:none; z-index:0; }
+body::before {
+  background-image:
+    radial-gradient(1.2px 1.2px at 23px 41px,#424242 50%,transparent 100%), radial-gradient(1.2px 1.2px at 171px 302px,#424242 50%,transparent 100%),
+    radial-gradient(1.2px 1.2px at 318px 96px,#424242 50%,transparent 100%), radial-gradient(1.2px 1.2px at 402px 388px,#424242 50%,transparent 100%),
+    radial-gradient(1.2px 1.2px at 88px 211px,#424242 50%,transparent 100%), radial-gradient(1.2px 1.2px at 266px 177px,#424242 50%,transparent 100%),
+    radial-gradient(1.2px 1.2px at 355px 265px,#424242 50%,transparent 100%), radial-gradient(1.2px 1.2px at 140px 374px,#424242 50%,transparent 100%),
+    radial-gradient(1.2px 1.2px at 47px 329px,#424242 50%,transparent 100%), radial-gradient(1.2px 1.2px at 234px 29px,#424242 50%,transparent 100%),
+    radial-gradient(1.2px 1.2px at 391px 150px,#424242 50%,transparent 100%), radial-gradient(1.2px 1.2px at 199px 118px,#424242 50%,transparent 100%);
+  background-size:420px 420px;
+}
+body::after {
+  background-image:
+    radial-gradient(1.3px 1.3px at 61px 523px,#868282 50%,transparent 100%), radial-gradient(1.3px 1.3px at 412px 88px,#868282 50%,transparent 100%),
+    radial-gradient(1.3px 1.3px at 288px 341px,#868282 50%,transparent 100%), radial-gradient(1.3px 1.3px at 540px 459px,#868282 50%,transparent 100%),
+    radial-gradient(1.3px 1.3px at 133px 207px,#868282 50%,transparent 100%), radial-gradient(1.3px 1.3px at 476px 601px,#868282 50%,transparent 100%),
+    radial-gradient(1.3px 1.3px at 352px 17px,#868282 50%,transparent 100%),
+    radial-gradient(1.6px 1.6px at 210px 655px,#8da3b9 50%,transparent 100%), radial-gradient(1.6px 1.6px at 688px 142px,#8da3b9 50%,transparent 100%),
+    radial-gradient(1.6px 1.6px at 455px 388px,#8da3b9 50%,transparent 100%), radial-gradient(1.6px 1.6px at 97px 301px,#8da3b9 50%,transparent 100%);
+  background-size:620px 620px, 620px 620px, 620px 620px, 620px 620px, 620px 620px, 620px 620px, 620px 620px, 760px 760px, 760px 760px, 760px 760px, 760px 760px;
+  animation:twinkle 5s ease-in-out infinite alternate;
+}
+@keyframes twinkle { from { opacity:.35 } to { opacity:1 } }
+@media (prefers-reduced-motion: reduce) { body::after { animation:none; } }
+
+main, footer { position:relative; z-index:1; width:100%; max-width:560px; }
+.shell { background:var(--n2); border:1px solid #1a1a1a; border-radius:19px; padding:10px; box-shadow:var(--shadow); display:flex; flex-direction:column; gap:10px; }
+.sec { font-size:12px; color:var(--n7); padding:4px 10px 0; font-variation-settings:"wght" 600; }
+.pane { background:var(--n3); border-radius:17px; padding:18px 20px; }
+.label { font-size:13px; color:var(--n7); font-variation-settings:"wght" 600; display:flex; justify-content:space-between; gap:12px; }
+.label span { font-variation-settings:"wght" 450; }
+.big { font-size:72px; line-height:1; letter-spacing:-.01em; margin-top:8px; font-variant-numeric:tabular-nums; }
+.big b { color:var(--blue); font-weight:inherit; }
+.mid { font-size:40px; line-height:1; margin-top:8px; }
+.mid small { font-size:17px; color:var(--n7); margin-left:6px; }
+.chips { display:flex; gap:6px; margin-top:14px; flex-wrap:wrap; }
+.chip { background:var(--n4); border-radius:9999px; padding:6px 12px; font-size:13px; color:var(--n8); display:inline-flex; gap:6px; align-items:center; }
+.chip b { font-weight:inherit; font-variation-settings:"wght" 600; color:var(--n10); }
+.up { color:var(--green) !important; } .down { color:var(--red) !important; }
+.cap { font-size:12px; color:var(--n7); margin-top:6px; }
+.bars { display:flex; align-items:flex-end; gap:3px; height:54px; margin-top:12px; }
+.bars i { flex:1; background:var(--n5); border-radius:3px 3px 1px 1px; min-height:1px; }
+.bars i.now { background:var(--blue); }
+.line { display:block; width:100%; height:54px; margin-top:12px; }
+.tiles { display:grid; grid-template-columns:repeat(3,1fr); gap:6px; }
+.tile { background:var(--n4); border-radius:12px; padding:12px 14px; }
+.tile .l { font-size:12px; color:var(--n7); }
+.tile .v { font-size:22px; margin-top:4px; }
+.tile .s { font-size:12px; color:var(--n7); margin-top:2px; }
+.foot { display:flex; justify-content:space-between; align-items:center; gap:12px; padding:0 10px 2px; font-size:12px; color:var(--n7); }
+footer { text-align:center; font-size:12px; color:var(--n7); margin-top:14px; }
+footer a, footer b { color:var(--blue); font-weight:inherit; text-decoration:none; }
+footer a:hover { text-decoration:underline; }
+@media (max-width: 420px) { .tiles { grid-template-columns:1fr; } .big { font-size:56px; } .foot { flex-direction:column; align-items:flex-start; } }
+</style>
+</head>
+<body>
+<main>
+  <div class="shell">
+    <div class="sec">Supply</div>
+    <div class="pane">
+      <div class="label">Grand Royal skins seen <span id="since"></span></div>
+      <div class="big" id="total">—</div>
+      <div class="bars" id="bars"></div>
+      <div class="cap">New skins first seen per day, last 14 days (UTC)</div>
+    </div>
+    <div class="tiles">
+      <div class="tile"><div class="l">Today</div><div class="v" id="today"></div><div class="s" id="today-s"></div></div>
+      <div class="tile"><div class="l">This week</div><div class="v" id="week"></div><div class="s" id="week-s"></div></div>
+      <div class="tile"><div class="l">Resold at least once</div><div class="v" id="resold"></div><div class="s" id="resold-s"></div></div>
+    </div>
+
+    <div class="sec" style="margin-top:4px">Market</div>
+    <div class="pane">
+      <div class="label">Median sale price <span>last 24h</span></div>
+      <div class="mid"><span id="median">—</span><small>coins</small></div>
+      <div class="chips" id="price-chips"></div>
+      <svg class="line" id="line" viewBox="0 0 400 54" preserveAspectRatio="none"></svg>
+      <div class="cap">Median price per day, last 14 days</div>
+    </div>
+    <div class="tiles">
+      <div class="tile"><div class="l">Lowest BIN now</div><div class="v" id="bin"></div><div class="s" id="bin-s"></div></div>
+      <div class="tile"><div class="l">Sold today</div><div class="v" id="sold"></div><div class="s" id="sold-s"></div></div>
+      <div class="tile"><div class="l">Coins traded today</div><div class="v" id="coins"></div><div class="s" id="coins-s"></div></div>
+    </div>
+
+    <div class="foot">
+      <span>Distinct unapplied skins on the auction house • a floor, not a total</span>
+      <span id="updated"></span>
+    </div>
+  </div>
+</main>
+<footer>made with <b>&lt;3</b> by <a href="https://github.com/asteriau">asteria</a></footer>
+
+<script>
+const DATA = new URLSearchParams(location.search).get('data') || 'https://raw.githubusercontent.com/asteriau/GrandRoyalTracker/data/skins.json';
+const $ = id => document.getElementById(id);
+const DAY = 86400000;
+const day = ms => new Date(ms).toISOString().slice(0, 10);
+const num = n => n.toLocaleString('en-US');
+const coins = n => n == null ? '—' : n >= 1e9 ? (n / 1e9).toFixed(1) + 'b' : n >= 1e6 ? (n / 1e6).toFixed(1) + 'm' : n >= 1e3 ? (n / 1e3).toFixed(1) + 'k' : String(n);
+const signed = n => (n > 0 ? '+' : '') + num(n);
+const pct = (a, b) => b ? ((a - b) / b * 100) : null;
+const tone = n => n > 0 ? 'up' : n < 0 ? 'down' : '';
+const short = iso => new Date(iso).toLocaleDateString('en-US', { month: 'short', day: 'numeric', timeZone: 'UTC' });
+
+function render(d) {
+  const now = Date.now();
+  const skins = Object.values(d.skins);
+  const firsts = skins.map(s => Date.parse(s[0]));
+  const inRange = (from, to) => firsts.filter(t => t >= from && t < to).length;
+
+  const total = num(skins.length);
+  $('total').innerHTML = total.replace(/,/g, '<b>,</b>');
+  $('since').textContent = firsts.length ? 'since ' + short(new Date(Math.min(...firsts)).toISOString()) : '';
+
+  const todayKey = day(now), yKey = day(now - DAY);
+  const perDay = {};
+  firsts.forEach(t => { const k = day(t); perDay[k] = (perDay[k] || 0) + 1; });
+  const today = perDay[todayKey] || 0, yesterday = perDay[yKey] || 0;
+  $('today').textContent = signed(today); $('today').className = 'v ' + tone(today);
+  $('today-s').textContent = 'yesterday ' + signed(yesterday);
+  const week = inRange(now - 7 * DAY, now + 1), lastWeek = inRange(now - 14 * DAY, now - 7 * DAY);
+  $('week').textContent = signed(week); $('week').className = 'v ' + tone(week);
+  $('week-s').textContent = 'last week ' + signed(lastWeek);
+  const resold = skins.filter(s => s[1] > 1).length;
+  $('resold').textContent = num(resold);
+  $('resold-s').textContent = skins.length ? (resold / skins.length * 100).toFixed(1) + '% of skins seen' : '';
+
+  const keys14 = Array.from({ length: 14 }, (_, i) => day(now - (13 - i) * DAY));
+  const counts = keys14.map(k => perDay[k] || 0), max = Math.max(1, ...counts);
+  $('bars').innerHTML = counts.map((c, i) => `<i style="height:${(c / max * 100).toFixed(0)}%" class="${i === 13 ? 'now' : ''}" title="${keys14[i]}: ${c}"></i>`).join('');
+
+  const recent = Object.values(d.sales).filter(s => Date.parse(s[0]) >= now - DAY).map(s => s[1]).sort((a, b) => a - b);
+  const median = recent.length ? recent[recent.length >> 1] : null;
+  $('median').textContent = coins(median);
+  const dy = d.days[yKey], d7 = d.days[day(now - 7 * DAY)];
+  const chips = [];
+  if (median != null && dy) { const p = pct(median, dy.median); chips.push(`<span class="chip"><b class="${tone(p)}">${(p > 0 ? '+' : '') + p.toFixed(1)}%</b> vs yesterday</span>`); }
+  if (median != null && d7) { const p = pct(median, d7.median); chips.push(`<span class="chip"><b class="${tone(p)}">${(p > 0 ? '+' : '') + p.toFixed(1)}%</b> vs 7 days ago</span>`); }
+  if (recent.length) chips.push(`<span class="chip">low <b>${coins(recent[0])}</b> • high <b>${coins(recent[recent.length - 1])}</b></span>`);
+  $('price-chips').innerHTML = chips.join('');
+
+  const meds = keys14.map(k => d.days[k] ? d.days[k].median : null);
+  const vals = meds.filter(v => v != null);
+  if (vals.length > 1) {
+    const lo = Math.min(...vals), hi = Math.max(...vals), span = hi - lo || 1;
+    const pts = meds.map((v, i) => v == null ? null : `${(i / 13 * 400).toFixed(1)},${(50 - (v - lo) / span * 46).toFixed(1)}`).filter(Boolean).join(' ');
+    $('line').innerHTML = `<polyline fill="none" stroke="#2e2e2e" stroke-width="1" points="0,53 400,53"/><polyline fill="none" stroke="#8da3b9" stroke-width="2" stroke-linejoin="round" points="${pts}"/>`;
+  }
+
+  const a = d.active;
+  $('bin').textContent = a ? coins(a.lowest_bin) : '—';
+  $('bin-s').textContent = a ? `${num(a.count)} listed right now` : '';
+  const dt = d.days[todayKey] || { sold: 0, coins: 0 };
+  $('sold').textContent = num(dt.sold); $('sold-s').textContent = 'yesterday ' + num(dy ? dy.sold : 0);
+  $('coins').textContent = coins(dt.coins); $('coins-s').textContent = 'yesterday ' + coins(dy ? dy.coins : 0);
+
+  const mins = Math.max(0, Math.round((now - Date.parse(d.updated)) / 60000));
+  $('updated').textContent = mins < 1 ? 'updated just now' : mins < 60 ? `updated ${mins} min ago` : `updated ${Math.round(mins / 60)} h ago`;
+}
+
+fetch(DATA, { cache: 'no-cache' }).then(r => { if (!r.ok) throw new Error(r.status); return r.json(); }).then(render)
+  .catch(() => { $('updated').textContent = 'data unavailable'; });
+</script>
+</body>
+</html>
