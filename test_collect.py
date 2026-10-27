@@ -1,11 +1,15 @@
+import contextlib
+import io
 import json
 import os
+import shutil
 import tempfile
 import unittest
 
 import collect
 
-FIX = json.load(open("test_fixture.json"))
+with open("test_fixture.json") as f:
+    FIX = json.load(f)
 
 
 class ExtractUuid(unittest.TestCase):
@@ -75,7 +79,7 @@ class Merge(unittest.TestCase):
         self.assertEqual(s["days"]["2026-10-26"]["sold"], 1)
 
     def test_active_replaced_when_given_kept_when_none(self):
-        act = {"at": NOW, "count": 5, "lowest_bin": 123}
+        act = {"count": 5, "lowest_bin": 123}
         s = collect.merge(self.empty(), [], [], act, NOW)
         self.assertEqual(s["active"], act)
         s = collect.merge(s, [], [], None, NOW)
@@ -106,32 +110,38 @@ def boom():
 class Main(unittest.TestCase):
     def setUp(self):
         self.dir = tempfile.mkdtemp()
+        self.addCleanup(shutil.rmtree, self.dir)
         self.path = os.path.join(self.dir, "skins.json")
 
     def read(self):
-        return json.load(open(self.path))
+        with open(self.path) as f:
+            return json.load(f)
+
+    def run_main(self, *a, **kw):
+        with contextlib.redirect_stderr(io.StringIO()), contextlib.redirect_stdout(io.StringIO()):
+            return collect.main(*a, **kw)
 
     def test_both_sources_down_exits_1_and_writes_nothing(self):
-        code = collect.main(self.path, NOW, fetch_sales=boom, fetch_active=boom)
+        code = self.run_main(self.path, NOW, fetch_sales=boom, fetch_active=boom)
         self.assertEqual(code, 1)
         self.assertFalse(os.path.exists(self.path))
 
     def test_one_source_down_still_writes(self):
-        code = collect.main(self.path, NOW, fetch_sales=lambda: [sale("a1", "2026-10-26T08:00:00Z", 100, "s1")], fetch_active=boom)
+        code = self.run_main(self.path, NOW, fetch_sales=lambda: [sale("a1", "2026-10-26T08:00:00Z", 100, "s1")], fetch_active=boom)
         self.assertEqual(code, 0)
         self.assertEqual(self.read()["skins"]["s1"], ["2026-10-26T08:00:00Z", 1])
         self.assertIsNone(self.read()["active"])
 
     def test_unchanged_state_is_not_rewritten(self):
         fs = lambda: [sale("a1", "2026-10-26T08:00:00Z", 100, "s1")]
-        fa = lambda: ([], {"at": NOW, "count": 0, "lowest_bin": None})
-        collect.main(self.path, NOW, fetch_sales=fs, fetch_active=fa)
+        fa = lambda: ([], {"count": 0, "lowest_bin": None})
+        self.run_main(self.path, NOW, fetch_sales=fs, fetch_active=fa)
         before = os.stat(self.path).st_mtime_ns
-        collect.main(self.path, "2026-10-27T12:15:00Z", fetch_sales=fs, fetch_active=fa)
+        self.run_main(self.path, "2026-10-27T12:15:00Z", fetch_sales=fs, fetch_active=fa)
         self.assertEqual(os.stat(self.path).st_mtime_ns, before)
 
     def test_missing_file_starts_empty(self):
-        code = collect.main(self.path, NOW, fetch_sales=lambda: [], fetch_active=lambda: ([{"item": "s9", "start": NOW}], {"at": NOW, "count": 1, "lowest_bin": 5}))
+        code = self.run_main(self.path, NOW, fetch_sales=lambda: [], fetch_active=lambda: ([{"item": "s9", "start": NOW}], {"count": 1, "lowest_bin": 5}))
         self.assertEqual(code, 0)
         self.assertEqual(self.read()["skins"], {"s9": [NOW, 0]})
 

@@ -2,6 +2,7 @@
 import base64
 import gzip
 import json
+import os
 import statistics
 import sys
 import urllib.request
@@ -115,14 +116,14 @@ def hypixel_active():
             listed.append({"item": item, "start": fmt(datetime.fromtimestamp(a["start"] / 1000, timezone.utc))})
             if a["bin"]:
                 bins.append(a["starting_bid"])
-    now = fmt(datetime.now(timezone.utc))
-    return listed, {"at": now, "count": len(listed), "lowest_bin": min(bins) if bins else None}
+    return listed, {"count": len(listed), "lowest_bin": min(bins) if bins else None}
 
 
 def main(path, now=None, fetch_sales=coflnet_sales, fetch_active=hypixel_active):
     now = now or fmt(datetime.now(timezone.utc).replace(microsecond=0))
     try:
-        old = json.load(open(path))
+        with open(path) as f:
+            old = json.load(f)
     except FileNotFoundError:
         old = EMPTY
     sales, listed, active = [], [], None
@@ -143,8 +144,9 @@ def main(path, now=None, fetch_sales=coflnet_sales, fetch_active=hypixel_active)
     check_no_shrink(old, new)
     if {k: v for k, v in new.items() if k != "updated"} == {k: v for k, v in old.items() if k != "updated"}:
         return 0
-    with open(path, "w") as f:
+    with open(path + ".tmp", "w") as f:
         json.dump(new, f, separators=(",", ":"))
+    os.replace(path + ".tmp", path)
     print(f"{len(new['skins'])} skins, {len(new['sales'])} sales in window")
     return 0
 
